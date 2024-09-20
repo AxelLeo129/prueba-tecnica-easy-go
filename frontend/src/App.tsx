@@ -51,7 +51,7 @@ function App() {
 
   const changeDoneStatus = async (id: string): Promise<void> => {
     setLoading(true);
-    const response = await put<{ statusChange: boolean }, unknown>('http://localhost:3000/tasks/change-status/' + id, null);
+    const response = await put<{ statusChange: boolean }, unknown>('https://prueba-tecnica-easy-go-production.up.railway.app/tasks/change-status/' + id, null);
     if (response && response.statusChange) fetchData();
   }
 
@@ -61,14 +61,14 @@ function App() {
       sortField,
       sortOrder
     };  
-    const data: Task[] | null = await list<Task[]>('http://localhost:3000/tasks', params);
+    const data: Task[] | null = await list<Task[]>('https://prueba-tecnica-easy-go-production.up.railway.app/tasks', params);
     if (data) setTasks(data);
     setLoading(false);
   }
 
   const getData = async (id: string) => {
     setLoading(true);
-    const data: Task | null = await get<Task>('http://localhost:3000/tasks/' + id);
+    const data: Task | null = await get<Task>('https://prueba-tecnica-easy-go-production.up.railway.app/tasks/' + id);
     if (data) {
       setTask(data);
       setOpenForm(true);
@@ -88,7 +88,7 @@ function App() {
   const handleDelete = (): void => {
     setLoading(true);
     setOpen(false);
-    delete0('http://localhost:3000/tasks/' + id).then(() => {
+    delete0('https://prueba-tecnica-easy-go-production.up.railway.app/tasks/' + id).then(() => {
       setAlertOptions({
         open: true,
         autoHideDuration: 3000,

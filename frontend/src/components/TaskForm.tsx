@@ -61,7 +61,7 @@ const TaskForm: React.FC<FormProps> = ({ data, onAlertChange, setEditData, onClo
     const handleSubmit = () => {
         setOpenSubmit(false);
         setIsLoading(true);
-        const action = id ? put<PutResponse, PostTask>('http://localhost:3000/tasks/' + id, { title: values.title, description: values.description, limitDate: values.limitDate }) : post<PostResponse, PostTask>('http://localhost:3000/tasks/', { title: values.title, description: values.description, limitDate: values.limitDate });
+        const action = id ? put<PutResponse, PostTask>('https://prueba-tecnica-easy-go-production.up.railway.app/tasks/' + id, { title: values.title, description: values.description, limitDate: values.limitDate }) : post<PostResponse, PostTask>('https://prueba-tecnica-easy-go-production.up.railway.app/tasks/', { title: values.title, description: values.description, limitDate: values.limitDate });
 
         action.then(() => {
             handleCancel();
