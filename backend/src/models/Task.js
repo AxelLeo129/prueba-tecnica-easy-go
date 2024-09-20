@@ -19,6 +19,10 @@ export const Task = sequelize.define('tasks', {
     active: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
+    },
+    done: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 }, {
     updatedAt: false,

@@ -5,4 +5,5 @@ export interface ListProps {
     setData: (tasks: Task[]) => void;
     getData: (id: string) => void;
     deleteAction: (id: string) => void;
+    changeStatus: (id: string) => Promise<void>;
 }

@@ -4,6 +4,7 @@ export interface Task {
     description: string;
     limit_date: string;
     active: boolean;
+    done: boolean;
     createdAt: string;
 }
 

@@ -1,12 +1,12 @@
 import React from "react";
 import { Task } from "../models/interfaces/task";
 import { ListProps } from "../models/interfaces/list";
-import { Card, CardActionArea, CardActions, CardContent, IconButton, Typography } from "@mui/material";
+import { Card, CardActionArea, CardActions, CardContent, Checkbox, IconButton, Typography } from "@mui/material";
 import { Reorder } from "framer-motion";
 import { DeleteOutline, EditOutlined } from "@mui/icons-material";
 import './styles.css';
 
-const List: React.FC<ListProps> = ({ data, setData, getData, deleteAction }) => {
+const List: React.FC<ListProps> = ({ data, setData, getData, deleteAction, changeStatus }) => {
 
     return (
         <>
@@ -25,6 +25,7 @@ const List: React.FC<ListProps> = ({ data, setData, getData, deleteAction }) => 
                                     </Typography>
                                 </CardContent>
                                 <CardActions className="form--actions-buttons">
+                                    <Checkbox {...{label: "Tarea finalizada"}} checked={task.done} onClick={() => changeStatus(task.id.toString())} />
                                     <IconButton color="error" aria-label="add to favorites" onClick={() => deleteAction(task.id.toString())}>
                                         <DeleteOutline />
                                     </IconButton>

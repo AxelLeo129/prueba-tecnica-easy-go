@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getTasks, getTask, createTask, deleteTask, updateTask } from '../controllers/tasks.controllers.js';
+import { getTasks, getTask, createTask, deleteTask, updateTask, changeDoneStatus } from '../controllers/tasks.controllers.js';
 
 const router = Router();
 
@@ -8,5 +8,6 @@ router.post('/tasks', createTask);
 router.put('/tasks/:id', updateTask);
 router.delete('/tasks/:id', deleteTask);
 router.get('/tasks/:id', getTask);
+router.put('/tasks/change-status/:id', changeDoneStatus);
 
 export default router;

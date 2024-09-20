@@ -4,5 +4,6 @@ CREATE TABLE tasks (
     description TEXT,
     limit_date DATE,
     active TINYINT(1) DEFAULT 1,
+    done TINYINT(1) DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
