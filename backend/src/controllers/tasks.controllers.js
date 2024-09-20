@@ -1,5 +1,12 @@
 import { Task } from "../models/Task.js";
 
+/**
+ * Cambia el estado de completado (done) de una tarea.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>} Respuesta en formato JSON con el estado del cambio.
+ */
 export const changeDoneStatus = async (req, res) => {
     try {
         const { id } = req.params;
@@ -12,6 +19,13 @@ export const changeDoneStatus = async (req, res) => {
     }
 }
 
+/**
+ * Obtiene todas las tareas activas, con opción de ordenarlas por un campo y orden específicos.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>} Respuesta en formato JSON con la lista de tareas.
+ */
 export const getTasks = async (req, res) => {
     try {
         // Obtenemos los query params (si no existen, no se aplicará orden)
@@ -48,6 +62,13 @@ export const getTasks = async (req, res) => {
     }
 };
 
+/**
+ * Crea una nueva tarea en la base de datos.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>} Respuesta en formato JSON con el estado de la creación.
+ */
 export const createTask = async (req, res) => {
     const { title, description, limitDate } = req.body;
     try {
@@ -63,6 +84,13 @@ export const createTask = async (req, res) => {
     }
 }
 
+/**
+ * Actualiza una tarea existente en la base de datos.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>} Respuesta en formato JSON con el estado de la actualización.
+ */
 export const updateTask = async (req, res) => {
     try {
         const { id } = req.params;
@@ -78,6 +106,13 @@ export const updateTask = async (req, res) => {
     }
 }
 
+/**
+ * Elimina (desactiva) una tarea en la base de datos.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>} Respuesta en formato JSON con el estado de la eliminación.
+ */
 export const deleteTask = async (req, res) => {
     try {
         const { id } = req.params;
@@ -90,6 +125,13 @@ export const deleteTask = async (req, res) => {
     }
 }
 
+/**
+ * Obtiene una tarea específica por su ID.
+ *
+ * @param {Object} req - Objeto de solicitud de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
+ * @returns {Promise<void>} Respuesta en formato JSON con los datos de la tarea o un error si no se encuentra.
+ */
 export const getTask = async (req, res) => {
     try {
         const { id } = req.params;
