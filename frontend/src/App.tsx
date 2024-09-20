@@ -16,6 +16,12 @@ import NotificationWrapper from './components/NotificationWrapper.component';
 import QuestionDialogWrapper from './components/QuestionDialogWrapper.component';
 import LoadingWrapper from './components/LoadingWrapper.component';
 
+
+/**
+ * Componente principal de la aplicación.
+ * 
+ * @returns {JSX.Element} Componente JSX para la aplicación principal.
+ */
 function App() {
 
   const [id, setId] = useState<number | string>(0);
@@ -33,28 +39,57 @@ function App() {
   const [sortOrder, setsortOrder] = useState<string>('');
   const [sortField, setsortField] = useState<string>('');
 
+  /**
+   * Manejador para cambiar el campo por el cual se ordenan las tareas.
+   * 
+   * @param {SelectChangeEvent} event El evento de selección.
+   */
   const handleChange = (event: SelectChangeEvent) => {
     setsortField(event.target.value as string);
   };
 
+  /**
+   * Manejador para cambiar el orden (ascendente o descendente).
+   * 
+   * @param {SelectChangeEvent} event El evento de selección.
+   */
   const handleChange1 = (event: SelectChangeEvent) => {
     setsortOrder(event.target.value as string);
   };
 
+  /**
+   * Hook que se ejecuta cuando cambian `sortField` o `sortOrder`, para actualizar los datos.
+   */
   useEffect(() => {
     fetchData();
   }, [sortField, sortOrder])
 
+  /**
+   * Hook que se ejecuta al cargar el componente por primera vez para obtener los datos iniciales.
+   */
   useEffect(() => {
     fetchData();
   }, [])
 
+  /**
+   * Cambia el estado de "completado" de una tarea.
+   * 
+   * @async
+   * @param {string} id El ID de la tarea.
+   * @returns {Promise<void>}
+   */
   const changeDoneStatus = async (id: string): Promise<void> => {
     setLoading(true);
     const response = await put<{ statusChange: boolean }, unknown>('tasks/change-status/' + id, null);
     if (response && response.statusChange) fetchData();
   }
 
+  /**
+   * Obtiene la lista de tareas y las actualiza en el estado.
+   * 
+   * @async
+   * @returns {Promise<void>}
+   */
   const fetchData = async () => {
     setLoading(true);
     const params = {
@@ -66,6 +101,13 @@ function App() {
     setLoading(false);
   }
 
+  /**
+   * Obtiene una tarea específica por su ID.
+   * 
+   * @async
+   * @param {string} id El ID de la tarea.
+   * @returns {Promise<void>}
+   */
   const getData = async (id: string) => {
     setLoading(true);
     const data: Task | null = await get<Task>('tasks/' + id);
@@ -76,15 +118,26 @@ function App() {
     setLoading(false);
   }
 
+  /**
+   * Abre el diálogo de confirmación para eliminar una tarea.
+   * 
+   * @param {string} id El ID de la tarea.
+   */
   const openDialog = (id: string): void => {
     setOpen(true);
     setId(id);
   }
 
+  /**
+   * Cierra el formulario de edición de tareas.
+   */
   const handleClose = (): void => {
     setOpenForm(false);
   }
 
+  /**
+   * Elimina una tarea y actualiza la lista de tareas.
+   */
   const handleDelete = (): void => {
     setLoading(true);
     setOpen(false);
@@ -107,6 +160,9 @@ function App() {
     }).finally(() => setLoading(false));
   }
 
+  /**
+   * Cancela la operación de eliminación.
+   */
   const handleCancel = (): void => {
     setOpen(false);
   }

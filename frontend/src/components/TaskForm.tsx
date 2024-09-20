@@ -23,6 +23,19 @@ const INITIAL_VALUES = {
     "limitDate": ""
 }
 
+/**
+ * @component TaskForm
+ * Formulario para crear o actualizar una tarea, con validaciones y manejo de estado.
+ * 
+ * @param {FormProps} props - Las propiedades necesarias para el componente TaskForm.
+ * @param {any} [props.data] - Los datos de la tarea que se van a editar (opcional).
+ * @param {Function} props.onAlertChange - Función para mostrar alertas después de una acción.
+ * @param {Function} props.setEditData - Función para establecer o limpiar los datos del formulario.
+ * @param {Function} props.onClose - Función para cerrar el formulario.
+ * @param {Function} props.onReload - Función para recargar la lista de tareas después de una acción exitosa.
+ * 
+ * @returns {JSX.Element} Un formulario para crear o actualizar tareas, con soporte para validación y manejo de errores.
+ */
 const TaskForm: React.FC<FormProps> = ({ data, onAlertChange, setEditData, onClose, onReload }) => {
 
     const TaskSchema = Yup.object().shape({
@@ -39,25 +52,40 @@ const TaskForm: React.FC<FormProps> = ({ data, onAlertChange, setEditData, onClo
     const [resetAction, setResetAction] = useState<Function>();
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
+    /**
+     * Maneja el evento de cancelar la edición o creación de una tarea.
+     */
     const handleCancel = () => {
         setInitialValues(INITIAL_VALUES);
         setId('');
         setEditData('task');
     }
 
+    /**
+     * Cierra el diálogo de confirmación de envío.
+     */
     const handleOpenSubmit = () => {
         setOpenSubmit(false);
     }
 
+    /**
+     * Cancela el envío y cierra el formulario.
+     */
     const handleCancelSubmit = () => {
         handleCancel();
         onClose();
     }
 
+    /**
+     * Cierra el diálogo de confirmación de cancelación.
+     */
     const handleOpenCancel = () => {
         setOpenCancel(false);
     }
 
+    /**
+     * Maneja el envío del formulario, ya sea para crear o actualizar una tarea.
+     */
     const handleSubmit = () => {
         setOpenSubmit(false);
         setIsLoading(true);
@@ -88,6 +116,7 @@ const TaskForm: React.FC<FormProps> = ({ data, onAlertChange, setEditData, onClo
 
     }
 
+    // Efecto para actualizar los valores iniciales cuando se cargan los datos de una tarea para edición
     useEffect(() => {
         if (data?.id && !isLoading) {
             setInitialValues({

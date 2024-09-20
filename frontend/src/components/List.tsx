@@ -6,6 +6,28 @@ import { Reorder } from "framer-motion";
 import { DeleteOutline, EditOutlined } from "@mui/icons-material";
 import './styles.css';
 
+/**
+ * @component List
+ * Componente de lista que muestra tareas utilizando tarjetas (`Card`) con funcionalidades de reordenamiento y acciones de edición, eliminación y cambio de estado.
+ * 
+ * @param {ListProps} props - Las propiedades necesarias para el componente List.
+ * @param {Task[]} props.data - Un arreglo de tareas (`Task`) que se muestran en la lista.
+ * @param {(tasks: Task[]) => void} props.setData - Función para actualizar la lista de tareas al reordenar.
+ * @param {(id: string) => void} props.getData - Función para obtener una tarea específica por su ID, generalmente usada para edición.
+ * @param {(id: string) => void} props.deleteAction - Función para eliminar una tarea específica por su ID.
+ * @param {(id: string) => Promise<void>} props.changeStatus - Función para cambiar el estado de una tarea (completada o no).
+ * 
+ * @returns {JSX.Element} Un componente JSX que representa una lista de tarjetas de tareas, cada una con acciones de edición, eliminación y un checkbox para marcar como completada.
+ * 
+ * @example
+ * <List 
+ *   data={tasks} 
+ *   setData={updateTasks} 
+ *   getData={editTask} 
+ *   deleteAction={removeTask} 
+ *   changeStatus={toggleTaskStatus} 
+ * />
+ */
 const List: React.FC<ListProps> = ({ data, setData, getData, deleteAction, changeStatus }) => {
 
     return (
